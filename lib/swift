@@ -627,7 +627,7 @@ function init_swift {
 }
 
 function install_swift {
-    git_clone $SWIFT_REPO $SWIFT_DIR $SWIFT_BRANCH
+    # git_clone $SWIFT_REPO $SWIFT_DIR $SWIFT_BRANCH
     setup_develop $SWIFT_DIR
     if is_apache_enabled_service swift; then
         install_apache_wsgi
