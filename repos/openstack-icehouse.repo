@@ -1,0 +1,5 @@
+[openstack-icehouse]
+name=OpenStack Icehouse
+baseurl=http://172.16.6.120/repos/openstack-icehouse/epel-6/
+enabled=1
+gpgcheck=0
