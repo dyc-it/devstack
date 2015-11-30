@@ -1,0 +1,11 @@
+1.Missing packages detected
+solution:read the log, find the following output like "No package python-mox available."
+sudo rpm -ivh ftp://ftp.is.co.za/mirror/fedora.redhat.com/epel/6/x86_64/python-mox-0.5.3-2.el6.noarch.rpm
+
+
+
+
+
+
+
+
