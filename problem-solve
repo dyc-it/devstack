@@ -2,6 +2,25 @@
 solution:read the log, find the following output like "No package python-mox available."
 sudo rpm -ivh ftp://ftp.is.co.za/mirror/fedora.redhat.com/epel/6/x86_64/python-mox-0.5.3-2.el6.noarch.rpm
 
+2.update python
+(1)sudo ./updateToPython2.7.sh
+django不支持python2.6吗？
+
+sudo cp /usr/bin/python /usr/bin/python.bak
+sudo rm -rf /usr/bin/python
+sudo ln -s /usr/local/bin/python2.7  /usr/bin/python
+
+(2)config yum
+修复 yum 工具
+此时yum应该是失效的，因为此时默认python版本已经是2.7了。而yum需要的是2.6 所以：
+[root@dbmasterxxx ~]# which yum
+vim /usr/bin/yum
+#修改 yum中的python
+将第一行  #!/usr/bin/python  改为 #!/usr/bin/python2.6
+此时yum就ok啦
+
+
+
 
 
 
