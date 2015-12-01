@@ -175,6 +175,7 @@ function install_heatclient {
 
 # install_heat() - Collect source and prepare
 function install_heat {
+    echo "install_heat"
     # git_clone $HEAT_REPO $HEAT_DIR $HEAT_BRANCH
 }
 
