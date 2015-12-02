@@ -83,6 +83,8 @@ else
     NEUTRON_BIN_DIR=$(get_python_exec_prefix)
 fi
 
+NEUTRON_BIN_DIR=/usr/local/bin
+
 NEUTRON_CONF_DIR=/etc/neutron
 NEUTRON_CONF=$NEUTRON_CONF_DIR/neutron.conf
 export NEUTRON_TEST_CONFIG_FILE=${NEUTRON_TEST_CONFIG_FILE:-"$NEUTRON_CONF_DIR/debug.ini"}
@@ -481,7 +483,8 @@ function start_neutron_service_and_check {
         CFG_FILE_OPTIONS+=" --config-file /$cfg_file"
     done
     # Start the Neutron service
-    run_process q-svc "python $NEUTRON_BIN_DIR/neutron-server $CFG_FILE_OPTIONS"
+    # run_process q-svc "python $NEUTRON_BIN_DIR/neutron-server $CFG_FILE_OPTIONS"
+    run_process q-svc "python /usr/local/bin/neutron-server $CFG_FILE_OPTIONS"
     echo "Waiting for Neutron to start..."
     if ! timeout $SERVICE_TIMEOUT sh -c "while ! wget --no-proxy -q -O- http://$Q_HOST:$Q_PORT; do sleep 1; done"; then
         die $LINENO "Neutron did not start"
@@ -639,7 +642,7 @@ function _configure_neutron_debug_command {
 }
 
 function _configure_neutron_dhcp_agent {
-    AGENT_DHCP_BINARY="$NEUTRON_BIN_DIR/neutron-dhcp-agent"
+    AGENT_DHCP_BINARY="/usr/local/bin/neutron-dhcp-agent"
     Q_DHCP_CONF_FILE=$NEUTRON_CONF_DIR/dhcp_agent.ini
 
     cp $NEUTRON_DIR/etc/dhcp_agent.ini $Q_DHCP_CONF_FILE
@@ -667,7 +670,8 @@ function _configure_neutron_l3_agent {
     # for l3-agent, only use per tenant router if we have namespaces
     Q_L3_ROUTER_PER_TENANT=$Q_USE_NAMESPACE
 
-    AGENT_L3_BINARY=${AGENT_L3_BINARY:-"$NEUTRON_BIN_DIR/neutron-l3-agent"}
+    # AGENT_L3_BINARY=${AGENT_L3_BINARY:-"/usr/local/bin/neutron-l3-agent"}
+    AGENT_L3_BINARY="/usr/local/bin/neutron-l3-agent"
     Q_L3_CONF_FILE=$NEUTRON_CONF_DIR/l3_agent.ini
 
     if is_service_enabled q-fwaas; then
@@ -687,7 +691,7 @@ function _configure_neutron_l3_agent {
 }
 
 function _configure_neutron_metadata_agent {
-    AGENT_META_BINARY="$NEUTRON_BIN_DIR/neutron-metadata-agent"
+    AGENT_META_BINARY="/usr/local/bin/neutron-metadata-agent"
     Q_META_CONF_FILE=$NEUTRON_CONF_DIR/metadata_agent.ini
 
     cp $NEUTRON_DIR/etc/metadata_agent.ini $Q_META_CONF_FILE

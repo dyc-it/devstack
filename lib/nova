@@ -54,11 +54,12 @@ NOVA_SERVICE_PROTOCOL=${NOVA_SERVICE_PROTOCOL:-$SERVICE_PROTOCOL}
 
 # Support entry points installation of console scripts
 if [[ -d $NOVA_DIR/bin ]]; then
+    # NOVA_BIN_DIR=$NOVA_DIR/bin
     NOVA_BIN_DIR=$NOVA_DIR/bin
 else
     NOVA_BIN_DIR=$(get_python_exec_prefix)
 fi
-
+NOVA_BIN_DIR=/usr/local/bin
 # Set the paths of certain binaries
 NOVA_ROOTWRAP=$(get_rootwrap_location nova)
 
@@ -703,7 +704,8 @@ function start_nova_api {
         service_port=$NOVA_SERVICE_PORT_INT
     fi
 
-    run_process n-api "$NOVA_BIN_DIR/nova-api"
+    # run_process n-api "$NOVA_BIN_DIR/nova-api"
+    run_process n-api "/usr/local/bin/nova-api"
     echo "Waiting for nova-api to start..."
     if ! wait_for_service $SERVICE_TIMEOUT http://$SERVICE_HOST:$service_port; then
         die $LINENO "nova-api did not start"

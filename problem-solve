@@ -20,6 +20,69 @@ vim /usr/bin/yum
 此时yum就ok啦
 
 
+3.python library dependency
+(1)python-keystoneclient (0.9.0)
+(2)oslo.config (1.2.1)
+(3)oslo.messaging (1.3.0.2)
+(4)oslo.rootwrap (1.0.0)
+python-novaclient=2.17
+python-neutronclient (2.3.4)
+python-openstackclient=0.3.1
+
+4.Object "netns" is unknown, try "ip help".
+sudo yum -y upgrade iproute
+
+
+5.tempest is at master branch and it's much too updated
+
+
+6.python-openstackclient
+sudo yum -y install python-openstackclient
+
+
+5.cannot install MySQL-python
+pip==7.1.0 cannot be found
+
+edit
+sudo vim /usr/bin/pip
+put #!/usr/bin/python2.6
+in the first line
+
+
+sudo pip install MySQL-python
+import MySQLdb
+
+
+6./usr/bin/neutron-db-manage: No such file or directory
+
+
+7.`/opt/stack/tempest/etc/tempest.conf.sample': No such file or directory
+add the file
+https://github.com/openstack/tempest/blob/havana-eol/etc/tempest.conf.sample
+
+
+
+
+8.SIOCADDRT: File exists
+route table dumplicate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

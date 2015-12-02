@@ -429,7 +429,8 @@ function _ssh_check_novanet {
 function get_rootwrap_location {
     local module=$1
 
-    echo "$(get_python_exec_prefix)/$module-rootwrap"
+    # echo "$(get_python_exec_prefix)/$module-rootwrap"
+    echo "/usr/local/bin/$module-rootwrap"
 }
 
 
