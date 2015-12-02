@@ -633,7 +633,8 @@ function init_nova {
         recreate_database nova latin1
 
         # Migrate nova database
-        $NOVA_BIN_DIR/nova-manage db sync
+        # $NOVA_BIN_DIR/nova-manage db sync
+        /usr/local/bin/nova-manage db sync
 
         if is_service_enabled n-cell; then
             recreate_database $NOVA_CELLS_DB latin1
