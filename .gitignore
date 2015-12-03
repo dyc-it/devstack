@@ -23,4 +23,3 @@ devstack-docs-*
 docs/
 docs-files
 .localrc.auto
-local.conf
