@@ -67,6 +67,52 @@ https://github.com/openstack/tempest/blob/havana-eol/etc/tempest.conf.sample
 route table dumplicate
 
 
+9.If you wish to run this script anyway run with FORCE=yes
+add FORCE=yes in local.conf
+
+
+10.Unable to find pip
+yum -y install python-pip
+
+11.Unit openvswitch.service failed to load
+yum -y install openvswitch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
