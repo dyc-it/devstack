@@ -23,3 +23,4 @@ devstack-docs-*
 docs/
 docs-files
 .localrc.auto
+.idea/*

@@ -79,6 +79,15 @@ yum -y install openvswitch
 
 
 
+11.git command
+git checkout -b dev/icehouse  icehouse-eol
+
+
+git checkout -b dev/icehouse  remotes/origin/dev/icehouse
+
+
+
+
 
 
 

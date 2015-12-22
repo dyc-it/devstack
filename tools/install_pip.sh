@@ -82,7 +82,7 @@ get_versions
 # Do pip
 
 # Eradicate any and all system packages
-uninstall_package python-pip
+# uninstall_package python-pip
 
 install_get_pip
 

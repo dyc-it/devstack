@@ -1,0 +1,15 @@
+Horizon is now available at http://10.0.0.20/
+Keystone is serving at http://10.0.0.20:5000/v2.0/
+Examples on using novaclient command line is in exercise.sh
+The default users are: admin and demo
+The password: openstack
+This is your host ip: 10.0.0.20
+
+You are using Q_AGENT_EXTRA_AGENT_OPTS to pass configuration into /etc/neutron/neutron.conf.
+Please convert that configuration in localrc to a /etc/neutron/neutron.conf section in local.conf:
+Q_AGENT_EXTRA_AGENT_OPTS will be removed early in the 'K' development cycle
+
+[[post-config|/$Q_PLUGIN_CONF_FILE]]
+[DEFAULT]
+
+tunnel_types=vxlan

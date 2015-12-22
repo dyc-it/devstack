@@ -220,26 +220,6 @@ fi
 # to pick up required packages.
 
 if [[ is_fedora && $DISTRO =~ (rhel) ]]; then
-    # Installing Open vSwitch on RHEL requires enabling the RDO repo.
-    RHEL6_RDO_REPO_RPM=${RHEL6_RDO_REPO_RPM:-"http://rdo.fedorapeople.org/openstack-icehouse/rdo-release-icehouse.rpm"}
-    RHEL6_RDO_REPO_ID=${RHEL6_RDO_REPO_ID:-"openstack-icehouse"}
-    if ! sudo yum repolist enabled $RHEL6_RDO_REPO_ID | grep -q $RHEL6_RDO_REPO_ID; then
-        echo "RDO repo not detected; installing"
-        yum_install $RHEL6_RDO_REPO_RPM || \
-            die $LINENO "Error installing RDO repo, cannot continue"
-    fi
-    # RHEL requires EPEL for many Open Stack dependencies
-    if [[ $DISTRO =~ (rhel7) ]]; then
-        EPEL_RPM=${RHEL7_EPEL_RPM:-"http://download.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.1.noarch.rpm"}
-    else
-        EPEL_RPM=${RHEL6_EPEL_RPM:-"http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm"}
-    fi
-    if ! sudo yum repolist enabled epel | grep -q 'epel'; then
-        echo "EPEL not detected; installing"
-        yum_install ${EPEL_RPM} || \
-            die $LINENO "Error installing EPEL repo, cannot continue"
-    fi
-
     # ... and also optional to be enabled
     is_package_installed yum-utils || install_package yum-utils
     sudo yum-config-manager --enable rhel-6-server-optional-rpms
@@ -772,23 +752,25 @@ if [[ -d $TOP_DIR/extras.d ]]; then
 fi
 
 # install the OpenStack client, needed for most setup commands
-if use_library_from_git "python-openstackclient"; then
-    git_clone_by_name "python-openstackclient"
-    setup_dev_lib "python-openstackclient"
-else
+#if use_library_from_git "python-openstackclient"; then
+    #git_clone_by_name "python-openstackclient"
+    #setup_dev_lib "python-openstackclient"
+#else
     # FIXME(adam)g: Work around a gate wedge by installing a capped novaclient
     # here, so that the following OSC installation does not pull in a newer one
     # via its uncapped requirement.  This can be removed once OSC ends up in a
     # venv.
-    pip_install "python-novaclient>=2.17.0,<2.21"
+    #pip_install "python-novaclient>=2.17.0,<2.21"
 
     # Also install the capped neutronclient as per blocked
     # https://review.openstack.org/#/c/157606/
-    pip_install "python-neutronclient>=2.3.4,<2.3.11"
+    #pip_install "python-neutronclient>=2.3.4,<2.3.11"
 
-    pip_install "python-openstackclient<=0.4.1"
-fi
-
+    # pip_install "python-openstackclient<=0.4.1"
+#fi
+pip_install "python-novaclient>=2.17.0,<2.21"
+pip_install "python-neutronclient==2.3.4"
+pip_install "python-openstackclient<=0.3.0"
 if [[ $TRACK_DEPENDS = True ]]; then
     $DEST/.venv/bin/pip freeze > $DEST/requires-post-pip
     if ! diff -Nru $DEST/requires-pre-pip $DEST/requires-post-pip > $DEST/requires.diff; then

@@ -46,11 +46,13 @@ function install_infra {
 
     # Install pbr
     if use_library_from_git "pbr"; then
-        git_clone_by_name "pbr"
-        setup_lib "pbr"
+        echo 'install pbr'
+        # git_clone_by_name "pbr"
+        # setup_lib "pbr"
     else
-        pip_install "pbr"
+        pip_install "pbr==0.10.0"
     fi
+    pip_install "pbr==0.10.0"
 }
 
 # Restore xtrace

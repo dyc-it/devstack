@@ -429,7 +429,7 @@ function install_keystone {
             install_package python-memcached
         fi
     fi
-    git_clone $KEYSTONE_REPO $KEYSTONE_DIR $KEYSTONE_BRANCH
+    # git_clone $KEYSTONE_REPO $KEYSTONE_DIR $KEYSTONE_BRANCH
     setup_develop $KEYSTONE_DIR
     if is_apache_enabled_service key; then
         install_apache_wsgi
